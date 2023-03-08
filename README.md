@@ -8,12 +8,12 @@ Relay sent webhooks for repository `push` events to your Discord server.
 
 # Installation
 ### Without Composer
-1. **Download** ``webhook-relay.zip`` file from [latest release](https://github.com/dotCore-off/webhook-relay/releases/download/1.0.1/webhook-relay.zip)
+1. **Download** ``webhook-relay.zip`` file from [latest release](https://github.com/dotCore-off/webhook-relay/releases/download/1.1/webhook-relay.zip)
 2. **Unzip it** and **upload folder content** to your webhost
 
 ### With Composer
 1. **Download** ``relay.php`` and ``config.php`` files and **upload them** to your webhost
-2. **Install** [Livaco Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook) using **Composer**
+2. **Install** [Livaco Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook) using ``composer install`` command
 
 ---
 
@@ -27,7 +27,7 @@ Relay sent webhooks for repository `push` events to your Discord server.
 
 # Customization
 **Too simple?** Fear not, Livaco got your back!  
-**You can customize your embed in** ``relay.php`` file at ``line 38``.  
+**You can customize your embed in** ``relay.php`` file at ``line 81``.  
 > [List of available methods to customize your embed](https://github.com/LivacoNew/EasyDiscordWebhook/blob/master/README.md)  
 > [A complicated example by Livaco](https://github.com/LivacoNew/EasyDiscordWebhook/blob/master/examples/Complicated%20Example.php)  
 > ![image](https://user-images.githubusercontent.com/64563384/223616465-510eddcf-74ef-4347-bc5d-fadb52341a57.png)
