@@ -6,6 +6,35 @@ require __DIR__.'/vendor/autoload.php';
 use Livaco\EasyDiscordWebhook\DiscordWebhook;
 use Livaco\EasyDiscordWebhook\Objects\Embed;
 
+// Required data in headers
+$aHeaders = array(
+    "REQUEST_METHOD" => "POST",
+    "HTTP_X_GITHUB_EVENT" => "push",
+    "HTTP_USER_AGENT" => "GitHub-Hookshot/*",
+);
+
+// Check if request is sent from GitHub - Credits: https://gist.github.com/jplitza/88d64ce351d38c2f4198
+function verifyHeaders($received, $check, $name = "array") {
+    $allowed = false;
+
+    if (is_array($received)) {
+        foreach($check as $k => $v) {
+            if (!array_key_exists($k, $received)) { break; }
+            if (is_array($v) && is_array($received[$k])) { verifyHeaders($received[$k], $v); }
+            if (is_array($v) || is_array($received[$k])) { break; }
+            if (!fnmatch($v, $received[$k])) { break; }
+
+            $allowed = true;
+        }
+    }
+
+    return $allowed;
+}
+
+// Headers verification here
+$bHeaders = verifyHeaders($_SERVER, $aHeaders, "$_SERVER");
+if (!$bHeaders) { http_response_code(403); die("Forbidden\n"); }
+
 // Test if we got a payload or if someone accessed the website directly
 if (isset($_POST["payload"])) {
     $sPayload = $_POST["payload"];
