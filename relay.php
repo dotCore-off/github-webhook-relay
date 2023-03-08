@@ -63,13 +63,23 @@ if (isset($_POST["payload"])) {
         $sContent .= $commit_desc;
     }
 
-    // Send webhook as an embed
+    /*
+        EMBED CONSTRUCTION - DEFAULT AVAILABLE VARIABLES
+        - $sRepository = Repository + Branch + New commits
+        - $sRepositoryUrl = URL to repository
+        - $sSender = GitHub sender username
+        - $sAccount = GitHub sender profile URL
+        - $sAvatar = GitHub sender profile avatar
+        - $sContent = list of all commits
+
+        Other variables can be fetched from $aPayload - see a GitHub Push webhook payload to view available keys
+    */
     DiscordWebhook::new($dc_webhookurl)
         ->addEmbed(Embed::new()
-            ->setAuthor($sSender ?? "Unknown", $sAccount ?? "", $sAvatar ?? "")
-            ->setTitle($sTitle ?? "No title provided")
-            ->setUrl($sTitleUrl ?? "")
-            ->setDescription($sContent ?? "No commit passed.")
+            ->setAuthor($sSender, $sAccount, $sAvatar)
+            ->setTitle($sRepository)
+            ->setUrl($sRepositoryUrl)
+            ->setDescription($sContent)
         )
         ->execute();
 } else {
