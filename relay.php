@@ -1,11 +1,10 @@
 <?php
 
+// Includes needed stuff
+include("config.php");
 require __DIR__.'/vendor/autoload.php';
 use Livaco\EasyDiscordWebhook\DiscordWebhook;
 use Livaco\EasyDiscordWebhook\Objects\Embed;
-
-// Put Discord webhook URL here
-$webhook_url = "";
 
 // Test if we got a payload or if someone accessed the website directly
 if (isset($_POST["payload"])) {
@@ -36,7 +35,7 @@ if (isset($_POST["payload"])) {
     }
 
     // Send webhook as an embed
-    DiscordWebhook::new($webhook_url)
+    DiscordWebhook::new($dc_webhookurl)
         ->addEmbed(Embed::new()
             ->setAuthor($sSender ?? "Unknown", $sAccount ?? "", $sAvatar ?? "")
             ->setTitle($sTitle ?? "No title provided")
@@ -46,7 +45,7 @@ if (isset($_POST["payload"])) {
         ->execute();
 } else {
     // Send a test webhook
-    DiscordWebhook::new($webhook_url)
+    DiscordWebhook::new($dc_webhookurl)
         ->setContent("This is a test ping sent from our Commits tracker.")
         ->execute();
 }
