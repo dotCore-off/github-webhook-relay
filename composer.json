@@ -1,0 +1,5 @@
+{
+    "require": {
+        "livaco/easydiscordwebhook": "^2.0"
+    }
+}
