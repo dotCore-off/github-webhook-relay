@@ -12,7 +12,7 @@ Relay sent webhooks for repository `push` events to your Discord server.
 
 # Installation
 ### Without Composer
-1. **Download** ``webhook-relay.zip`` file from [latest release](https://github.com/dotCore-off/webhook-relay/releases/tag/1.0)
+1. **Download** ``webhook-relay.zip`` file from [latest release](https://github.com/dotCore-off/webhook-relay/releases/download/1.0/webhook-relay.zip)
 2. **Unzip it** and **upload folder content** to your webhost
 
 ### With Composer
