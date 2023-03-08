@@ -22,7 +22,7 @@ Relay sent webhooks for repository `push` events to your Discord server.
 4. In your **repository settings**, **add a Webhook** with the following details
 > Payload URL: `URL to your relay.php file` *(https://example.com/relay.php)*  
 > Content Type: `application/x-www-form-urlencoded`
-5. Upon webhook creation, you should receive a **test ping on your Discord server**
+5. Upon webhook creation, you should now receive a **message upon every push to the repository**
 > ![image](https://user-images.githubusercontent.com/64563384/223610428-4b47fafd-1f90-4e71-b515-7093bf83edb1.png)
 
 # Customization
