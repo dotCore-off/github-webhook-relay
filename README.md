@@ -1,4 +1,4 @@
-# GitHub Commits Relay
+# Github Webhooks Relay
 Relay sent webhooks for repository `push` events to your Discord server.
 
 # Features
