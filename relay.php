@@ -45,10 +45,14 @@ if (isset($_POST["payload"])) {
     $sContent = "";
 
     // Grab repository info
-    $sTitle = "[" . $aPayload["repository"]["name"];
-    $sTitle .= ":" . $aPayload["repository"]["default_branch"] . "]";
-    $sTitle .= " " . count($aCommits) . " new commit" . (count($aCommits) <= 1 ? "" : "s");
-    $sTitleUrl = $aPayload["repository"]["url"];
+    if (count($dc_hiddenreps) == 0 || !in_array($aPayload["repository"]["name"], $dc_hiddenreps)) {
+        $sRepository = "[" . $aPayload["repository"]["name"];
+        $sRepository .= ":" . $aPayload["repository"]["default_branch"] . "]";
+        $sRepository .= " " . count($aCommits) . " new commit" . (count($aCommits) <= 1 ? "" : "s");
+        $sRepositoryUrl = $aPayload["repository"]["url"];
+    } else {
+        $sRepository = "[hidden-repository:main] " . count($aCommits) . " new commit" . (count($aCommits) <= 1 ? "" : "s");
+    }
     
     // Grab sender info
     $sSender = $aPayload["sender"]["login"];
