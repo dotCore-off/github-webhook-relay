@@ -25,5 +25,13 @@ Relay sent webhooks for repository `push` events to your Discord server.
 5. Upon webhook creation, you should receive a **test ping on your Discord server**
 > ![image](https://user-images.githubusercontent.com/64563384/223610428-4b47fafd-1f90-4e71-b515-7093bf83edb1.png)
 
+# Customization
+**Too simple?** Fear not, Livaco got your back!  
+**You can customize your embed in** ``relay.php`` file at ``line 38``.  
+> [List of available methods to customize your embed](https://github.com/LivacoNew/EasyDiscordWebhook/blob/master/README.md)  
+> [A complicated example by Livaco](https://github.com/LivacoNew/EasyDiscordWebhook/blob/master/examples/Complicated%20Example.php)  
+> ![image](https://user-images.githubusercontent.com/64563384/223616465-510eddcf-74ef-4347-bc5d-fadb52341a57.png)
+
+
 # Credits
 - [Livaco](https://github.com/LivacoNew) for his wonderful [Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook)
