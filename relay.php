@@ -2,7 +2,7 @@
 
 // Includes needed stuff
 include("config.php");
-require __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 use Livaco\EasyDiscordWebhook\DiscordWebhook;
 use Livaco\EasyDiscordWebhook\Objects\Embed;
 
