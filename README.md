@@ -6,10 +6,6 @@ Relay sent webhooks for repository `push` events to your Discord server.
 - **ability to hide a commit message**
 - **supports Discord Role mention**
 
-# Requirements
-- [Livaco Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook)
-- **a cheap web hosting**
-
 # Installation
 ### Without Composer
 1. **Download** ``webhook-relay.zip`` file from [latest release](https://github.com/dotCore-off/webhook-relay/releases/download/1.0/webhook-relay.zip)
@@ -28,3 +24,6 @@ Relay sent webhooks for repository `push` events to your Discord server.
 > Content Type: `application/x-www-form-urlencoded`
 5. Upon webhook creation, you should receive a **test ping on your Discord server**
 > ![image](https://user-images.githubusercontent.com/64563384/223610428-4b47fafd-1f90-4e71-b515-7093bf83edb1.png)
+
+# Credits
+- [Livaco](https://github.com/LivacoNew) for his wonderful [Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook)
