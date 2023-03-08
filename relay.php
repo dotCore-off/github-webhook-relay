@@ -30,7 +30,8 @@ if (isset($_POST["payload"])) {
     // Fill content by looping through commits
     foreach($aCommits as $commit) {
         $commit_hash = substr($commit["id"], 0, 7);
-        $commit_desc = "[`" . $commit_hash . "`](" . $commit["url"] . ") " . $commit["message"] . "  ";
+        $commit_message = $commit["message"];
+        $commit_desc = "[`" . $commit_hash . "`](" . $commit["url"] . ") " . (str_starts_with($commit_message, $dc_hiddenchar) ? $dc_hiddenmsg : $commit_message) . "\n";
         $sContent .= $commit_desc;
     }
 
