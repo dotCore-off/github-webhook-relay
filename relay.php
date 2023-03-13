@@ -68,27 +68,39 @@ if (isset($_POST["payload"])) {
     }
 
     /*
-        EMBED CONSTRUCTION - DEFAULT AVAILABLE VARIABLES
-        - $sRepository = Repository + Branch + New commits
-        - $sRepositoryUrl = URL to repository
-        - $sSender = GitHub sender username
-        - $sAccount = GitHub sender profile URL
-        - $sAvatar = GitHub sender profile avatar
-        - $sContent = list of all commits
+        MESSAGE CONSTRUCTION - DEFAULT AVAILABLE VARIABLES
+        - $info["repository"] = Repository + Branch + New commits
+        - $info["repository_url"] = URL to repository
+        - $info["sender"] = GitHub sender username
+        - $info["account"] = GitHub sender profile URL
+        - $info["avatar"] = GitHub sender profile avatar
+        - $info["commits"] = list of all commits
 
         Other variables can be fetched from $aPayload - see a GitHub Push webhook payload to view available keys
     */
-    DiscordWebhook::new($dc_webhookurl)
+    $aInfo = array(
+        ["sender"] => $sSender,
+        ["account"] => $sAccount,
+        ["avatar"] => $sAvatar,
+        ["repository"] => $sRepository,
+        ["repository_url"] => $sRepositoryUrl,
+        ["commits"] => $sContent
+    );
+
+    // Generate a new DiscordWebhook and send it - view README for further customization
+    function sendToWebhook($url, $info) {
+        DiscordWebhook::new($url)
         ->addEmbed(Embed::new()
-            ->setAuthor($sSender, $sAccount, $sAvatar)
-            ->setTitle($sRepository)
-            ->setUrl($sRepositoryUrl)
-            ->setDescription($sContent)
+            ->setAuthor($info["sender"], $info["account"], $info["avatar"])
+            ->setTitle($info["repository"])
+            ->setUrl($info["repository_url"])
+            ->setDescription($info["commits"])
         )
         ->execute();
-} else {
-    // Send a test webhook
-    DiscordWebhook::new($dc_webhookurl)
-        ->setContent("This is a test ping sent from our Commits tracker.")
-        ->execute();
+    }
+
+    // Send to all configured Discord webhooks
+    foreach($dc_webhookurl as $webhook) {
+        sendToWebhook($webhook, $aInfo);
+    }
 }
