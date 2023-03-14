@@ -11,6 +11,7 @@ $aHeaders = array(
     "REQUEST_METHOD" => "POST",
     "HTTP_X_GITHUB_EVENT" => "push",
     "HTTP_USER_AGENT" => "GitHub-Hookshot/*",
+    "HTTP_X_HUB_SIGNATURE-256" => "sha256=*"
 );
 
 // Check if request is sent from GitHub - Credits: https://gist.github.com/jplitza/88d64ce351d38c2f4198
@@ -34,6 +35,26 @@ function verifyHeaders($received, $check, $name = "array") {
 // Headers verification here
 $bHeaders = verifyHeaders($_SERVER, $aHeaders, "$_SERVER");
 if (!$bHeaders) { http_response_code(403); die("Forbidden\n"); }
+
+// Verify signature to make sure it's from GitHub
+try {
+    // Get signature and raw payload
+    $sSignature = $_SERVER["HTTP_X_HUB_SIGNATURE_256"];
+    $sRawPayload = file_get_contents("php://input");
+
+    // Get algorithm and hash from signature
+    list($sAlgo, $sHash) = explode("=", $sSignature, 2);
+
+    // Generate payload hash based on algorithm and secret
+    $sPayloadHash = hash_hmac($sAlgo, $sRawPayload, $dc_secret);
+
+    if ($sHash !== $sPayloadHash) {
+        http_response_code(403); die("Forbidden\n");
+    }
+} catch (Exception $e) {
+    // if something goes wrong, just die
+    http_response_code(403); die("Forbidden\n");
+}
 
 // Test if we got a payload or if someone accessed the website directly
 if (isset($_POST["payload"])) {
