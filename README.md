@@ -3,8 +3,10 @@ Relay sent webhooks for repository `push` events to your Discord server.
 
 # Features
 - **customizable Discord message** - from a detailed embed to simple commit summary
-- **ability to hide a commit message**
+- **ability to hide a commit message / repository name**
 - **supports Discord Role mention**
+- **supports GitHub Secret Token protection**
+- **supports multiple Discord webhooks at once**
 
 # Installation
 ### Without Composer
@@ -37,3 +39,4 @@ Relay sent webhooks for repository `push` events to your Discord server.
 
 # Credits
 - [Livaco](https://github.com/LivacoNew) for his wonderful [Discord Webhook library](https://github.com/LivacoNew/EasyDiscordWebhook)
+- [JustPlayerDE](https://github.com/JustPlayerDE) for his work on supporting secured GitHub webhooks
