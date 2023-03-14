@@ -36,27 +36,28 @@ function verifyHeaders($received, $check, $name = "array") {
 $bHeaders = verifyHeaders($_SERVER, $aHeaders, "$_SERVER");
 if (!$bHeaders) { http_response_code(403); die("Forbidden\n"); }
 
-// Test if we got a payload or if someone accessed the website directly
-if (isset($_POST["payload"])) {
-    try {
-        // Get signature and raw payload
-        $sSignature = $_SERVER["HTTP_X_HUB_SIGNATURE_256"];
-        $sRawPayload = file_get_contents("php://input");
+// Verify signature to make sure it's from GitHub
+try {
+    // Get signature and raw payload
+    $sSignature = $_SERVER["HTTP_X_HUB_SIGNATURE_256"];
+    $sRawPayload = file_get_contents("php://input");
 
-        // Get algorithm and hash from signature
-        list($sAlgo, $sHash) = explode("=", $sSignature, 2);
+    // Get algorithm and hash from signature
+    list($sAlgo, $sHash) = explode("=", $sSignature, 2);
 
-        // Generate payload hash based on algorithm and secret
-        $sPayloadHash = hash_hmac($sAlgo, $sRawPayload, $dc_secret);
+    // Generate payload hash based on algorithm and secret
+    $sPayloadHash = hash_hmac($sAlgo, $sRawPayload, $dc_secret);
 
-        if ($sHash !== $sPayloadHash) {
-            http_response_code(403); die("Forbidden\n");
-        }
-    } catch (Exception $e) {
-        // if something goes wrong, just die
+    if ($sHash !== $sPayloadHash) {
         http_response_code(403); die("Forbidden\n");
     }
+} catch (Exception $e) {
+    // if something goes wrong, just die
+    http_response_code(403); die("Forbidden\n");
+}
 
+// Test if we got a payload or if someone accessed the website directly
+if (isset($_POST["payload"])) {
     $sPayload = $_POST["payload"];
     $aPayload = json_decode($sPayload, true);
 
