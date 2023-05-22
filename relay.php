@@ -68,7 +68,7 @@ if (isset($_POST["payload"])) {
     // Grab repository info
     if (count($dc_hiddenreps) == 0 || !in_array($aPayload["repository"]["name"], $dc_hiddenreps)) {
         $sRepository = "[" . $aPayload["repository"]["name"];
-        $sRepository .= ":" . $aPayload["repository"]["default_branch"] . "]";
+        $sRepository .= ":" . str_replace("refs/head/", "", $aPayload["ref"]) . "]";
         $sRepository .= " " . count($aCommits) . " new commit" . (count($aCommits) <= 1 ? "" : "s");
         $sRepositoryUrl = $aPayload["repository"]["url"];
     } else {
