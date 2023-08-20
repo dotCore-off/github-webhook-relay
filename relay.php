@@ -100,12 +100,12 @@ if (isset($_POST["payload"])) {
         Other variables can be fetched from $aPayload - see a GitHub Push webhook payload to view available keys
     */
     $aInfo = array(
-        ["sender"] => $sSender,
-        ["account"] => $sAccount,
-        ["avatar"] => $sAvatar,
-        ["repository"] => $sRepository,
-        ["repository_url"] => $sRepositoryUrl,
-        ["commits"] => $sContent
+        "sender" => $sSender,
+        "account" => $sAccount,
+        "avatar" => $sAvatar,
+        "repository" => $sRepository,
+        "repository_url" => $sRepositoryUrl,
+        "commits" => $sContent
     );
 
     // Generate a new DiscordWebhook and send it - view README for further customization
